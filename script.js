@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // KODE INI HANYA BERJALAN JIKA ADA COUNTDOWN DI HALAMAN (index.html)
     if (document.getElementById('countdownContainer')) {
-        const targetDate = new Date("Aug 03, 2025 00:00:00").getTime();
+        const targetDate = new Date("Aug 04, 2025 00:00:00").getTime();
         const hariEl = document.getElementById('hari');
         const jamEl = document.getElementById('jam');
         const menitEl = document.getElementById('menit');
