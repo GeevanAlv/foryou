@@ -1,0 +1,315 @@
+/* Import font yang romantis dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    color: white;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    /* Mencegah scrollbar aneh karena konfeti */
+}
+
+#welcomePage {
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5em;
+    font-weight: 400;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+}
+
+/* Styling untuk Timer */
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#timer .box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    width: 100px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#timer .box span {
+    display: block;
+    font-size: 3em;
+    font-weight: 700;
+}
+
+#timer .box p {
+    margin: 0;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Styling untuk Ucapan & Foto yang muncul nanti */
+.hidden {
+    display: none; /* Sembunyikan elemen */
+}
+
+#ucapanWrapper {
+    opacity: 0;
+    transform: scale(0.5); /* Mulai dari ukuran kecil */
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#ucapanWrapper.visible {
+    opacity: 1;
+    transform: scale(1); /* Tumbuh ke ukuran normal */
+}
+
+.foto-utama {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Membuat foto menjadi lingkaran */
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+/* Styling untuk Canvas Konfeti */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    pointer-events: none; /* Agar tidak bisa diklik dan tidak menghalangi konten */
+}
+
+/* --- Gaya untuk Halaman Surat/Ucapan --- */
+.letter-container {
+    background: #fff;
+    color: #444;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 80px 20px 20px 20px; /* Memberi ruang untuk tombol kembali */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: left;
+    border-top: 8px solid #e91e63;
+}
+
+.letter-container h1 {
+    color: #333;
+    text-align: center;
+}
+
+.letter-container p {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.letter-container .signature {
+    text-align: right;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    margin-top: 40px;
+    color: #e91e63;
+}
+
+/* --- Definisi Animasi Detak Jantung --- */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.3);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- Menerapkan Animasi ke Ikon Hati --- */
+.heart-icon {
+  display: inline-block; /* Diperlukan agar animasi transform bekerja */
+  animation: heartbeat 1.5s infinite ease-in-out;
+  animation-delay: 0.5s; /* Sedikit jeda sebelum animasi dimulai */
+}
+
+/* --- Gaya untuk Tombol Kontrol Musik --- */
+#music-control-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(233, 30, 99, 0.8);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+}
+
+#music-control-button:hover {
+    background-color: #e91e63;
+}
+
+/* Membuat Ikon "Play" (Segitiga) */
+#music-control-button.play::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 18px solid white;
+}
+
+/* Membuat Ikon "Pause" (Dua Garis) */
+#music-control-button.pause::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 18px;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+}
+
+/* --- Gaya untuk Pesan Pembuka Musik --- */
+#music-prompt {
+    color: white;
+    height: 90vh; /* Mengisi hampir seluruh tinggi layar */
+    
+    /* Tiga baris di bawah ini adalah kunci untuk membuatnya ke tengah */
+    display: flex;
+    flex-direction: column; /* Menumpuk item secara vertikal */
+    justify-content: center; /* Tengah secara vertikal */
+    align-items: center;    /* Tengah secara horizontal */
+}
+
+#music-prompt h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+#music-prompt p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 400px; /* Agar teks tidak terlalu lebar di layar besar */
+    text-align: center;
+}
+
+/* Persiapan untuk animasi surat per paragraf */
+.letter-container h1,
+.letter-container p {
+  opacity: 0; /* Awalnya semua judul dan paragraf transparan */
+  transform: translateY(20px); /* Posisinya sedikit di bawah */
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Transisi halus */
+}
+
+/* Kelas untuk memunculkan paragraf */
+.letter-container .fade-in {
+  opacity: 1; /* Target akhir: terlihat penuh */
+  transform: translateY(0); /* Kembali ke posisi normal */
+}
+
+/* Media query untuk layar dengan lebar maksimal 600px (biasanya ukuran HP) */
+@media (max-width: 600px) {
+    .back-button {
+        margin-top: 15px; /* Kurangi margin atas */
+        padding: 8px 15px; /* Kurangi padding */
+        font-size: 0.9em; /* Perkecil sedikit font */
+    }
+
+    .letter-container {
+        margin-top: 60px; /* Sesuaikan jarak surat dari atas jika perlu */
+        padding: 30px; /* Kurangi padding di dalam surat */
+    }
+}
+
+/* --- Gaya BARU untuk Tombol Kembali (Floating Button) --- */
+.back-button {
+    /* Membuatnya melayang di pojok kiri atas */
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    z-index: 999;
+    
+    /* Ukuran dan bentuk lingkaran */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    /* Menghilangkan teks "Kembali" secara visual */
+    font-size: 0;
+    text-indent: -9999px;
+    
+    /* Gaya visual lainnya (serupa dengan tombol musik) */
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+}
+
+/* Membuat ikon panah ke kiri menggunakan CSS */
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(180deg);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid #e91e63; /* Warna panah */
+}
+
+/* Gaya untuk Tombol "Hembuskan Harapanmu" yang Mewah */
+.blow-button-style {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2em;
+    font-style: italic;
+    color: #b08968; /* Warna coklat keemasan */
+    background: transparent;
+    border: 2px solid #b08968;
+    border-radius: 50px; /* Bentuk kapsul yang elegan */
+    padding: 15px 40px; /* Ruang lebih luas */
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 1px; /* Jarak antar huruf */
+    margin-top: 40px;
+}
+
+.blow-button-style:hover {
+    background: #b08968;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}

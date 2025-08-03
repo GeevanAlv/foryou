@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spesial Untukmu!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="welcomePage">
+        <div id="countdownContainer">
+            <h1>Sesuatu yang spesial akan datang...</h1>
+            <div id="timer">
+                <div class="box"><span id="hari">0</span><p>Hari</p></div>
+                <div class="box"><span id="jam">0</span><p>Jam</p></div>
+                <div class="box"><span id="menit">0</span><p>Menit</p></div>
+                <div class="box"><span id="detik">0</span><p>Detik</p></div>
+            </div>
+        </div>
+
+        <div id="ucapanWrapper" class="hidden">
+            <img src="images/pacargueh.jpg" alt="Foto Cantik" class="foto-utama">
+            <h1>Selamat Ulang Tahun, Sayangkuu!!</h1>
+            <a href="kue.html" class="button-style cta-button">Ada Hadiah Buat Kamu!<span class="heart-icon">❤️</span></a>
+        </div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

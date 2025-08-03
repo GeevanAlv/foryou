@@ -1,0 +1,137 @@
+/* CSS untuk Halaman Kue */
+.cake-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+#instruction {
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+.cake {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    margin-top: 100px;
+}
+
+.plate {
+    width: 300px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.layer {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    background: #553c13;
+    box-shadow: inset 0 -5px 0 rgba(0,0,0,0.1);
+}
+.layer-top { top: 0; border-radius: 50% / 20px; }
+.layer-middle { top: 50px; border-radius: 50% / 20px; }
+.layer-bottom { top: 100px; border-radius: 50% / 20px; }
+
+.icing {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    background: #f0e4d0;
+    border-radius: 50% / 20px;
+}
+
+.drip {
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 40px;
+    background: #f0e4d0;
+    border-radius: 0 0 10px 10px;
+}
+.drip1 { left: 30px; }
+.drip2 { left: 120px; height: 30px; }
+.drip3 { left: 200px; }
+
+.candles {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: -50px;
+    display: flex;
+    justify-content: center;
+}
+
+.candle {
+    width: 10px;
+    height: 50px;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    box-shadow: inset -2px 0 0 rgba(0,0,0,0.1);
+}
+
+.candle.lit .flame {
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: -20px;
+    animation: flicker 1s ease-in-out infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.8); opacity: 0.8; }
+}
+
+/* Efek Asap setelah lilin mati */
+.candle:not(.lit)::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 15px;
+    background: #555;
+    border-radius: 50%;
+    top: -20px;
+    left: 2.5px;
+    opacity: 0;
+    animation: smoke 2s ease-out forwards;
+}
+
+@keyframes smoke {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { transform: translateY(-15px); opacity: 0.5; }
+    100% { transform: translateY(-30px); opacity: 0; }
+}
+
+#blow-button {
+    margin-top: 30px;
+}
+
+#final-wish {
+    margin-top: 20px;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#final-wish:not(.hidden) {
+    transform: scale(1);
+}
+
+.hidden { display: none; }
